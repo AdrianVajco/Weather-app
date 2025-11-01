@@ -1,11 +1,33 @@
-# čas stráveny pri robení kódu: cca 3-4 hodiny 
-
+# čas stráveny pri robení kódu: cca 5 hodin
+from tkinter import *
+from tkinter import Tk
+import tkinter as tk
 import requests
 
+root = Tk()
+
+countrycc = tk.StringVar()
+mesto3 = tk.StringVar()
+jazykc = tk.StringVar()
+countryc = tk.Label(root, text="Zadaj krajinu (napr: 'sk'): ")
+countryc.pack()
+countryc1 = tk.Entry(root, textvariable=countrycc)
+countryc1.pack()
+mestoz = tk.Label(root, text="Zadaj mesto: ")
+mestoz.pack()
+mestoz1 = tk.Entry(root, textvariable=mesto3)
+mestoz1.pack()
+jazyk1 = tk.Label(root, text="Zadaj jazyk (napr: 'sk'): ")
+jazyk1.pack()
+jazyk2 = tk.Entry(root, textvariable=jazykc)
+jazyk2.pack()
+Label(root, text="Zavri toto okno aby si sa dostal ďalej").pack()
+root.mainloop()
+
 api = "d78bb880bdfc9f39db3e5ed24f322ee9"
-country_code = str(input("vyberte si krajinu(skratku, napr.: 'sk'): "))
-mesto = str(input("vyberte si mesto(cely názov): "))
-jazyk = str(input("vyberte si jazyk(skratku, napr.: 'sk'): "))
+country_code = countrycc.get()
+mesto = mesto3.get()
+jazyk = jazykc.get()
 url = f"https://api.openweathermap.org/data/2.5/weather?q={mesto},{country_code}&appid={api}&lang={jazyk}&units=metric"
 request = requests.get(url)
 info = request.json()
@@ -23,51 +45,61 @@ if request.status_code == 200:
     vietor = info['wind']['speed'], "m/s"
     oblacnost = info['clouds']['all'], "%"
     viditelnost = info['visibility'], "m"
-print(f"--------------------------------------------\n"
-      "Vyber si čo chceš vedieť o počasí: ")
 
-c = input("teplota (Y/N): ")
-d = input("pocitova teplota (Y/N):")
-e = input("minimalna teplota (Y/N):")
-f = input("maximalna teplota (Y/N):")
-g = input("počasie (oblačnosť) (Y/N):")
-h = input("rychlost vetra (Y/N):")
-i = input("vlhkost (Y/N):")
-ii = input("oblačnosť (Y/N):")
-j = input("atmosfericky tlak (Y/N):")
-jj = input("viditelnost (Y/N):")
+koren = Tk()
+Label(koren, text="Vyber si čo chceš vedieť o počasí:").pack()
+c = IntVar()
+check1 = tk.Checkbutton(koren, text='teplota', variable=c)
+check1.pack()
+d = IntVar()
+check2 = tk.Checkbutton(koren, text='pocitova teplota', variable=d)
+check2.pack()
+e = IntVar()
+check3 = tk.Checkbutton(koren, text='minimalna teplota', variable=e)
+check3.pack()
+f = IntVar()
+check4 = tk.Checkbutton(koren, text='maximalna teplota', variable=f)
+check4.pack()
+g = IntVar()
+check5 = tk.Checkbutton(koren, text='počasie (prši/neprši/sneži/nesneži)', variable=g)
+check5.pack()
+h = IntVar()
+check6 = tk.Checkbutton(koren, text='rychlost vetra', variable=h)
+check6.pack()
+i = IntVar()
+check7 = tk.Checkbutton(koren, text='vlhkost', variable=i)
+check7.pack()
+ii = IntVar()
+check8 = tk.Checkbutton(koren, text='oblačnost', variable=ii)
+check8.pack()
+j = IntVar()
+check9 = tk.Checkbutton(koren, text='atmosfericky tlak', variable=j)
+check9.pack()
+jj = IntVar()
+check10 = tk.Checkbutton(koren, text='viditelnost', variable=jj)
+check10.pack()
+Label(koren, text="Zavri toto okno aby si sa dostal ďalej").pack()
+koren.mainloop()
 
-print(f"____________________________________________\n"
-      f"AKTUALNE POCASIE V MESTE {mesto}:")
-
-if c == "y" or c == "Y":    
-    print(f"------------------------------------\n"
-          f"teplota: {teplota}")
-if d == "y" or d == "Y":
-    print(f"------------------------------------\n"
-          f"pocitová teplota: {pocitovo}")
-if e == "y" or e == "Y":
-    print(f"------------------------------------\n"
-          f"min teplota: {min_teplota}")
-if f == "y" or f == "Y":
-    print(f"------------------------------------\n"
-          f"max teplota: {max_teplota}")
-if g == "y" or g == "Y":
-    print(f"------------------------------------\n"
-          f"počasie: {pocasie}")
-if h == "y" or h == "Y":
-    print(f"------------------------------------\n"
-          f"vietor: {vietor}")
-if i == "y" or i == "Y":
-    print(f"------------------------------------\n"
-          f"vlhkosť: {vlhkost}")
-if ii == "y" or ii == "Y":
-    print(f"------------------------------------\n"
-          f"oblačnosť: {oblacnost}")
-if j == "y" or j == "Y":
-    print(f"------------------------------------\n"
-          f"atmosferický tlak: {tlak}")
-if jj == "y" or jj == "Y":
-    print(f"------------------------------------\n"
-          f"viditelnost: {viditelnost}\n"
-          f"___________________________________________\n")
+root1 = Tk()
+if c.get():
+    tk.Label(root1, text=f"teplota: {teplota}").pack()
+if d.get():
+    tk.Label(root1, text=f"pocitová teplota: {pocitovo}").pack()
+if e.get():
+    tk.Label(root1, text=f"min teplota: {min_teplota} ").pack()
+if f.get():
+    tk.Label(root1, text=f"max teplota: {max_teplota} ").pack()
+if g.get():
+    tk.Label(root1, text=f"počasie: {pocasie} ").pack()
+if h.get():
+    tk.Label(root1, text=f"vietor: {vietor} ").pack()
+if i.get():
+    tk.Label(root1, text=f"vlhkosť: {vlhkost} ").pack()
+if ii.get():
+    tk.Label(root1, text=f"oblačnosť: {oblacnost} ").pack()
+if j.get():
+    tk.Label(root1, text=f"atmosferický tlak: {tlak} ").pack()
+if jj.get():
+    tk.Label(root1, text=f"viditelnost: {viditelnost} ").pack()
+root1.mainloop()
