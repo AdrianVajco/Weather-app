@@ -33,6 +33,7 @@ request = requests.get(url)
 info = request.json()
 
 if request.status_code == 200:
+    print("predpoved počasia:")
     
     teplota = info['main']['temp'], "°C"
     pocitovo = info['main']['feels_like'], "°C"
@@ -102,4 +103,5 @@ if j.get():
 if jj.get():
     tk.Label(root1, text=f"viditelnost: {viditelnost} ").pack()
 root1.mainloop()
+
 
